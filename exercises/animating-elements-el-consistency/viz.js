@@ -13,16 +13,12 @@ function updateUi() {
 	// TODO select fruit and bind all data
 	var update = d3.select("#fruit")
     	.selectAll("li")
-	.data(data, function(d, i) {
-		return d.id;
-	});
+	.data(data, get('id'));
 		
 	// TODO create els
 	update.enter().append('li');
 	var updateEnter = update
-		.text(function(d) {
-			return d.name;
-		})
+		.text(get('name'))
 		.style('top', function(d, i) {
 			return i * 25 + 'px';
 		});
@@ -31,3 +27,11 @@ function updateUi() {
 }
 
 updateUi();
+
+// Helper function: use in place of the short functions like function(data, index) { return data.SOMETHING; }
+function get(key) {
+  return function(data, index) {
+    return data[key];
+  }
+}
+
