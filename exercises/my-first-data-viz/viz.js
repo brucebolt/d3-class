@@ -15,14 +15,31 @@ var data = [
 
 
 // TODO select groups (.film), bind data
-var films;
+var films = d3.selectAll('.film')
+  .data(data);
+
 // TODO translate the groups so
 //  - each group's x is 80px to right of previous
 //  - each group's y is (200 - (d.cageFilms * 20 + 20)) px
+films
+    .style('transform', function(data, index) {
+    var x = (index * 80 + 80) + 'px';
+    var y = (200 - (data.cageFilms * 20 + 20)) + 'px';
+    return 'translate(' + x + ', ' + y + ')';
+  });
 
 // TODO make each circle's radius (poolDeaths / 4) pixels
-var circles;
+var circles = films
+  .select('circle')
+  .attr('r', function(data, index) {
+    return (data.poolDeaths / 4);
+  });
 
 
 // TODO set each <text>'s content to d.year
-var text;
+var text = films
+  .select('text')
+  .text(function(data, index) {
+    return data.year;
+  });
+
