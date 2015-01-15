@@ -12,9 +12,21 @@ function updateUi() {
 	
 	// TODO select fruit and bind all data
 	var update = d3.select("#fruit")
-    	.selectAll("li");
+    	.selectAll("li")
+	.data(data, function(d, i) {
+		return d.id;
+	});
 		
 	// TODO create els
+	update.enter().append('li');
+	var updateEnter = update
+		.text(function(d) {
+			return d.name;
+		})
+		.style('top', function(d, i) {
+			return i * 25 + 'px';
+		});
+
   // TODO set top based on index
 }
 
