@@ -9,15 +9,28 @@ tick();
 
 function render() {
   // TODO select elements
-  d3.select("#bind-to-me");
+  var update = d3.select("#bind-to-me")
+    .selectAll('li')
+    .data(data);
   //
   // TODO handle existing elements
+  update
+    .text(function(d) {
+      return d.text;
+    });
   //
   // TODO handle new elements
+  var enter = update.enter();
+  enter.append('li')
+    .text(function(d) {
+    return d.text;
+  });
   //
   // TODO elements that need to leave
+  var exit = update.exit().remove();
 }
 
+// tick() function adds random elements every x number of seconds
 function tick() {
   setInterval(function() {
 
