@@ -18,12 +18,15 @@ function visualise() {
   // TODO you're responsible for setting up the scales
   var popularityToRadius = d3.scale.linear()
   // TODO set the domain to the extent of the popularity values
+  popularityToRadius.domain(d3.extent(data, function(d) { return d.popularity; }));
   // TODO set the range to minMax
+  popularityToRadius.range(minMax);
 
   // TODO copy the previous scale but change its output range
   // to work on colors
-  var popularityToColor = popularityToRadius;
-
+  var popularityToColor = popularityToRadius
+    .copy()
+    .range(["hsl(0, 80%, 80%)", "hsl(240, 80%, 80%"]);
 
   // just read below this, no modifications necessary
   var svg = d3.select("svg")
